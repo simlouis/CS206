@@ -1,3 +1,5 @@
+import math
+
 import pybullet as p
 import time as t
 import pybullet_data
@@ -25,12 +27,20 @@ for i in range(500):
         bodyIndex=robotId,
         jointName="Torso_BackLeg",
         controlMode=p.POSITION_CONTROL,
-        targetPosition=0.0,
+        targetPosition=-math.pi / 4.0,
+        maxForce=500
+    )
+
+    pyrosim.Set_Motor_For_Joint(
+        bodyIndex=robotId,
+        jointName="Torso_FrontLeg",
+        controlMode=p.POSITION_CONTROL,
+        targetPosition=math.pi / 4.0,
         maxForce=500
     )
 
     print(backLegSensorValues[i])
-    t.sleep(1 / 60)
+    t.sleep(1 / 100)
 
 numpy.save("data/backLegSensorValues.npy", backLegSensorValues)
 numpy.save("data/frontLegSensorValues.npy", frontLegSensorValues)
