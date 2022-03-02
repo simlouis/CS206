@@ -23,5 +23,5 @@ class SIMULATION:
             self.robot.sense(i)
             self.robot.think()
             self.robot.act(i)
-            t.sleep(1 / 30)
+            t.sleep(1 / 1000)
             # print(i)
