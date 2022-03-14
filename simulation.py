@@ -14,9 +14,6 @@ class SIMULATION:
         p.setGravity(0.0, 0.0, -9.8)
         self.robot.prepare_to_sense()
 
-    def __del__(self):
-        p.disconnect()
-
     def run(self):
         for i in range(1000):
             p.stepSimulation()
@@ -25,3 +22,6 @@ class SIMULATION:
             self.robot.act(i)
             t.sleep(1 / 1000)
             # print(i)
+
+    def __del__(self):
+        p.disconnect()

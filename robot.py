@@ -20,7 +20,7 @@ class ROBOT:
             self.sensors[linkName] = SENSOR(linkName)
 
     def sense(self, t):
-        for i in self.sensors:
+        for i in pyrosim.linkNamesToIndices:
             self.sensors[i].get_value(t)
 
     def prepare_to_act(self):
@@ -34,9 +34,8 @@ class ROBOT:
                 jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)
                 desiredAngle = self.nn.Get_Value_Of(neuronName)
                 self.motors[jointName].set_value(self.robotId, desiredAngle)
+
                 print(neuronName, jointName, desiredAngle)
-        # for i in self.motors:
-        #     self.motors[i].set_value(self.robotId, desiredAngle)
 
     def think(self):
         self.nn.Update()
