@@ -7,8 +7,8 @@ import time as t
 
 class SIMULATION:
     def __init__(self, directOrGUI):
-
-        if directOrGUI == "DIRECT":
+        self.directOrGUI = directOrGUI
+        if self.directOrGUI == "DIRECT":
             p.connect(p.DIRECT)
         else:
             p.connect(p.GUI)
@@ -26,7 +26,8 @@ class SIMULATION:
             self.robot.sense(i)
             self.robot.think()
             self.robot.act(i)
-            t.sleep(1 / 240)
+            if self.directOrGUI == "GUI":
+                t.sleep(1 / 240)
 
     def get_fitness(self):
         self.robot.get_fitness()
