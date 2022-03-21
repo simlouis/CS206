@@ -8,7 +8,7 @@ frontLegAmplitude = numpy.pi / 6
 frontLegFrequency = 5
 frontLegPhaseOffset = numpy.pi / 2
 
-numberOfGenerations = 2
+numberOfGenerations = 10
 
-populationSize = 2
+populationSize = 10
 

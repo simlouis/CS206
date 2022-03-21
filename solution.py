@@ -23,8 +23,7 @@ class SOLUTION:
         while not os.path.exists(fitnessFileName):
             t.sleep(0.01)
         f = open(fitnessFileName)
-        temp = f.readline()
-        temp = float(temp)
+        temp = float(f.readline())
         self.fitness = temp
         os.system("del {}".format(fitnessFileName))
 

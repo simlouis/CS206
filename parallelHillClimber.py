@@ -8,6 +8,7 @@ class PARALLEL_HILL_CLIMBER:
     def __init__(self):
         os.system("del brain*.nndf")
         os.system("del fitness*.txt")
+        os.system("del tmp*.txt")
         self.parents = {}
         self.children = {}
         self.nextAvailableID = 0
@@ -43,9 +44,9 @@ class PARALLEL_HILL_CLIMBER:
             self.children[i].mutate()
 
     def evaluate(self, solutions):
-        for i in solutions:
+        for i in range(c.populationSize):
             solutions[i].start_simulation("DIRECT")
-        for i in self.parents:
+        for i in range(c.populationSize):
             solutions[i].wait_for_simulation_to_end()
 
     def select(self):
@@ -64,5 +65,5 @@ class PARALLEL_HILL_CLIMBER:
             else:
                 best = self.parents[i + 1]
 
-            best.start_simulation("GUI")
+        best.start_simulation("GUI")
 
