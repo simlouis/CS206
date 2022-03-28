@@ -1,3 +1,5 @@
+import sys
+
 from solution import SOLUTION
 import constants as c
 import copy
@@ -59,11 +61,12 @@ class PARALLEL_HILL_CLIMBER:
             print("\nParent Fitness: {}, Child Fitness: {}\n".format(self.parents[i].fitness, self.children[i].fitness))
 
     def show_best(self):
+        best_key = 0
+        best = self.parents[0].fitness
         for i in range(0, len(self.parents.keys()) - 1):
-            if self.parents[i].fitness < self.parents[i + 1].fitness:
-                best = self.parents[i]
-            else:
-                best = self.parents[i + 1]
+            if self.parents[i].fitness < best:
+                best = self.parents[i].fitness
+                best_key = i
 
-        best.start_simulation("GUI")
+        self.parents[best_key].start_simulation("GUI")
 
