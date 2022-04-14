@@ -31,7 +31,21 @@ class SOLUTION:
     def create_world(self):
         pyrosim.Start_SDF("world.sdf")
 
+        # Left Wall
+        left_x = -2
+        left_y = -2
+        for i in range(10):
+            pyrosim.Send_Cube(name="Left_Cubes", pos=[left_x, left_y, 1], size=[1, 1, 1])
+            left_x -= 1.5
+            left_y += 1
 
+        # Right Wall
+        right_x = 2
+        right_y = 2
+        for i in range(10):
+            pyrosim.Send_Cube(name="Right_Cubes", pos=[right_x, right_y, 1], size=[1, 1, 1])
+            right_x -= 1.5
+            right_y += 1
 
         pyrosim.End()
 
