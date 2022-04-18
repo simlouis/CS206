@@ -1,5 +1,4 @@
 import sys
-
 from solution import SOLUTION
 import constants as c
 import copy
@@ -50,21 +49,23 @@ class PARALLEL_HILL_CLIMBER:
             solutions[i].start_simulation("DIRECT")
         for i in range(c.populationSize):
             solutions[i].wait_for_simulation_to_end()
+        self.print()
 
     def select(self):
         for i in self.parents:
-            if self.children[i].fitness < self.parents[i].fitness :
+            if self.children[i].fitness > self.parents[i].fitness:
                 self.parents[i] = self.children[i]
 
     def print(self):
-        for i in self.parents:
-            print("\nParent Fitness: {}, Child Fitness: {}\n".format(self.parents[i].fitness, self.children[i].fitness))
+        if len(self.children) != 0 and len(self.parents) != 0:
+            for i in self.parents:
+                print("\nParent Fitness: {}, Child Fitness: {}\n".format(self.parents[i].fitness, self.children[i].fitness))
 
     def show_best(self):
         best_key = 0
-        best = self.parents[0].fitness
+        best = -1000.0
         for i in range(0, len(self.parents.keys()) - 1):
-            if self.parents[i].fitness < best:
+            if self.parents[i].fitness > best:
                 best = self.parents[i].fitness
                 best_key = i
 
