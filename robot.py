@@ -55,4 +55,5 @@ class ROBOT:
         f.write(str(xCoordinateOfLinkZero))
         f.close()
         os.system("rename {} fitness{}.txt".format(filename, solutionID))
+        return xCoordinateOfLinkZero
 

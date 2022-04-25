@@ -32,20 +32,20 @@ class SOLUTION:
         pyrosim.Start_SDF("world.sdf")
 
         # Left Wall
-        left_x = -2
-        left_y = -2
-        for i in range(10):
-            pyrosim.Send_Cube(name="Left_Cubes", pos=[left_x, left_y, 1], size=[1, 1, 1])
-            left_x -= 1.5
-            left_y += 1
-
-        # Right Wall
-        right_x = 2
-        right_y = 2
-        for i in range(10):
-            pyrosim.Send_Cube(name="Right_Cubes", pos=[right_x, right_y, 1], size=[1, 1, 1])
-            right_x -= 1.5
-            right_y += 1
+        # left_x = -2
+        # left_y = -2
+        # for i in range(10):
+        #     pyrosim.Send_Cube(name="Left_Cubes", pos=[left_x, left_y, 1], size=[1, 1, 1])
+        #     left_x -= 1.5
+        #     left_y += 1
+        #
+        # # Right Wall
+        # right_x = 2
+        # right_y = 2
+        # for i in range(10):
+        #     pyrosim.Send_Cube(name="Right_Cubes", pos=[right_x, right_y, 1], size=[1, 1, 1])
+        #     right_x -= 1.5
+        #     right_y += 1
 
         pyrosim.End()
 
@@ -109,6 +109,23 @@ class SOLUTION:
     def create_brain(self):
         pyrosim.Start_NeuralNetwork("brain{}.nndf".format(self.myID))
 
+        # # Quadruped
+        # pyrosim.Send_Sensor_Neuron(name=0, linkName="BackLowerLeg")
+        # pyrosim.Send_Sensor_Neuron(name=1, linkName="FrontLowerLeg")
+        # pyrosim.Send_Sensor_Neuron(name=2, linkName="LeftLowerLeg")
+        # pyrosim.Send_Sensor_Neuron(name=3, linkName="RightLowerLeg")
+        #
+        # # Motor neurons
+        # pyrosim.Send_Motor_Neuron(name=4, jointName="Torso_BackLeg")
+        # pyrosim.Send_Motor_Neuron(name=5, jointName="Torso_FrontLeg")
+        # pyrosim.Send_Motor_Neuron(name=6, jointName="Torso_LeftLeg")
+        # pyrosim.Send_Motor_Neuron(name=7, jointName="Torso_RightLeg")
+        # pyrosim.Send_Motor_Neuron(name=8, jointName="BackLeg_BackLowerLeg")
+        # pyrosim.Send_Motor_Neuron(name=9, jointName="FrontLeg_FrontLowerLeg")
+        # pyrosim.Send_Motor_Neuron(name=10, jointName="LeftLeg_LeftLowerLeg")
+        # pyrosim.Send_Motor_Neuron(name=11, jointName="RightLeg_RightLowerLeg")
+
+        # Hexaped
         # Sensor Neurons
         pyrosim.Send_Sensor_Neuron(name=0, linkName="BackLowerLeg")
         pyrosim.Send_Sensor_Neuron(name=1, linkName="FrontLowerLeg")
