@@ -20,7 +20,7 @@ class PARALLEL_HILL_CLIMBER:
         for i in range(0, c.populationSize):
             self.parents[i] = SOLUTION(self.nextAvailableID)
             self.nextAvailableID += 1
-        self.matrix = np.empty((c.populationSize, c.numberOfGenerations))
+        self.matrix = np.empty((c.numberOfGenerations, c.populationSize))
 
     def evolve(self):
         self.evaluate(self.parents, currentGen=0)
@@ -54,13 +54,13 @@ class PARALLEL_HILL_CLIMBER:
             solutions[i].start_simulation("DIRECT")
         for i in range(c.populationSize):
             solutions[i].wait_for_simulation_to_end()
-            self.matrix[self.pop_size, currentGen] = solutions[i].fitness
+            self.matrix[currentGen, self.pop_size] = solutions[i].fitness
             self.pop_size += 1
         self.pop_size = 0
 
     def select(self):
         for i in self.parents:
-            if self.children[i].fitness < self.parents[i].fitness :
+            if self.children[i].fitness < self.parents[i].fitness:
                 self.parents[i] = self.children[i]
 
     def print(self):

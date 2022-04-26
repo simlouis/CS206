@@ -9,7 +9,7 @@ frontLegFrequency = 5
 frontLegPhaseOffset = numpy.pi / 2
 
 numberOfGenerations = 15
-populationSize = 5
+populationSize = 3
 
 numSensorNeurons = 6
 numMotorNeurons = 12
