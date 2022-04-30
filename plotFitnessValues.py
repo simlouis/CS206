@@ -4,6 +4,7 @@ import constants as c
 
 A_data = numpy.load("A_data.npy")
 B_data = numpy.load("B_data.npy")
+gen_data = numpy.load("400A_data.npy")
 
 A_data_mean = []
 B_data_mean = []

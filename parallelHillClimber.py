@@ -54,7 +54,10 @@ class PARALLEL_HILL_CLIMBER:
             solutions[i].start_simulation("DIRECT")
         for i in range(c.populationSize):
             solutions[i].wait_for_simulation_to_end()
-            self.matrix[currentGen, self.pop_size] = solutions[i].fitness
+            if solutions[i].fitness < self.parents[i].fitness:
+                self.matrix[currentGen, self.pop_size] = solutions[i].fitness
+            else:
+                self.matrix[currentGen, self.pop_size] = self.parents[i].fitness
             self.pop_size += 1
         self.pop_size = 0
 
