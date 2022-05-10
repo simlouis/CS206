@@ -15,15 +15,15 @@ class PARALLEL_HILL_CLIMBER:
         self.parents = {}
         self.children = {}
         self.nextAvailableID = 0
-        self.pop_size = 0
         self.gen_size = 0
         for i in range(0, c.populationSize):
             self.parents[i] = SOLUTION(self.nextAvailableID)
             self.nextAvailableID += 1
-        self.matrix = np.empty((c.numberOfGenerations, c.populationSize))
+        self.parent_matrix = np.empty((c.populationSize, c.numberOfGenerations))
+        self.children_matrix = np.empty((c.populationSize, c.numberOfGenerations))
 
     def evolve(self):
-        self.evaluate(self.parents, currentGen=0)
+        self.evaluate(self.parents, currentGen=self.gen_size)
 
         for currentGeneration in range(c.numberOfGenerations):
             self.evolve_for_one_generation(currentGeneration)
@@ -55,11 +55,11 @@ class PARALLEL_HILL_CLIMBER:
         for i in range(c.populationSize):
             solutions[i].wait_for_simulation_to_end()
             if solutions[i].fitness < self.parents[i].fitness:
-                self.matrix[currentGen, self.pop_size] = solutions[i].fitness
+                self.parent_matrix[i, currentGen] = solutions[i].fitness
             else:
-                self.matrix[currentGen, self.pop_size] = self.parents[i].fitness
-            self.pop_size += 1
-        self.pop_size = 0
+                self.parent_matrix[i, currentGen] = self.parents[i].fitness
+
+            self.children_matrix[i, currentGen] = solutions[i].fitness
 
     def select(self):
         for i in self.parents:
@@ -82,5 +82,7 @@ class PARALLEL_HILL_CLIMBER:
 
     def save_data(self):
         # numpy.savetxt("data.txt", self.matrix)
-        with open('B_data.npy', 'wb') as file:
-            np.save(file, self.matrix)
+        with open('A_parent_data.npy', 'wb') as file:
+            np.save(file, self.parent_matrix)
+        with open('A_children_data.npy', 'wb') as file:
+            np.save(file, self.children_matrix)

@@ -2,25 +2,47 @@ import numpy
 import matplotlib.pyplot as pyplot
 import constants as c
 
-A_data = numpy.load("A_data.npy")
-B_data = numpy.load("B_data.npy")
-gen_data = numpy.load("400A_data.npy")
+Quad_parent_data = numpy.load("A_parent_data.npy")
+Quad_children_data = numpy.load("A_children_data.npy")
+Hex_parent_data = numpy.load("B_parent_data.npy")
+Hex_children_data = numpy.load("B_children_data.npy")
 
-A_data_mean = []
-B_data_mean = []
+ax = pyplot.subplots()
 
-for i in range(len(A_data)):
-    A_data_mean.append(numpy.mean(A_data[i]))
+Quad_avg_children = []
+for i in range(len(Quad_children_data)):
+    Quad_avg_children.append(numpy.mean(Quad_children_data[i]))
 
-for i in range(len(B_data)):
-    B_data_mean.append(numpy.mean(B_data[i]))
+Quad_avg_children.sort(reverse=True)
 
-pyplot.xlabel("Generation")
+Hex_avg_children = []
+for i in range(len(Hex_children_data)):
+    Hex_avg_children.append(numpy.mean(Hex_children_data[i]))
+
+Hex_avg_children.sort(reverse=True)
+
+pyplot.scatter(range(len(Quad_avg_children)), Quad_avg_children, label="Quadruped Avg Child Fitness")
+pyplot.scatter(range(len(Hex_avg_children)), Hex_avg_children, label="Hex Avg Child Fitness")
+
+Hex_parent_mean = []
+for i in range(len(Quad_parent_data)):
+    Hex_parent_mean.append(numpy.mean(Hex_parent_data[i]))
+
+Hex_parent_mean.sort(reverse=True)
+pyplot.plot(Hex_parent_mean, label="Hexapod Parent's Average")
+
+Quad_parent_mean = []
+for i in range(len(Quad_parent_data)):
+    Quad_parent_mean.append(numpy.mean(Quad_parent_data[i]))
+
+Quad_parent_mean.sort(reverse=True)
+pyplot.plot(Quad_parent_mean, label="Quadrupeds Parent's Average")
+
+
+pyplot.xticks([0, 1, 2, 3, 4])
+pyplot.xlabel("Parent")
 pyplot.ylabel("Fitness")
-
-pyplot.plot(A_data_mean, label="Quadruped")
-pyplot.plot(B_data_mean, label="Hexapod")
-
-pyplot.legend(bbox_to_anchor=(0.75, 1))
-pyplot.savefig("AB_Testing.png")
+pyplot.title("Average Fitnesses")
+pyplot.legend(loc='upper right', fontsize=8)
+pyplot.savefig("Final_Graph.png")
 pyplot.show()

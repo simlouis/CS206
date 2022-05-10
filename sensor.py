@@ -6,11 +6,11 @@ import pyrosim.neuron as neuron
 class SENSOR:
     def __init__(self, link_name):
         self.link_name = link_name
-        self.values = numpy.zeros(1500)
+        self.values = numpy.zeros(2000)
 
     def get_value(self, t):
         self.values[t] = pyrosim.Get_Touch_Sensor_Value_For_Link(self.link_name)
-        if t == 1499:
+        if t == 1999:
             pass
             # print(self.values)
 

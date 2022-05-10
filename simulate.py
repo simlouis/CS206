@@ -1,5 +1,3 @@
-import os
-
 from simulation import SIMULATION
 import sys
 
